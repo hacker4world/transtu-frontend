@@ -1,0 +1,28 @@
+<div class="flex">
+  <!-- Left Sidenav -->
+
+  <app-sidebar></app-sidebar>
+  <!-- Main Content -->
+  <main class="flex-1 ml-64">
+    <!-- Margin left for sidenav -->
+    <!-- Content Header -->
+    <header class="bg-white shadow-sm">
+      <div class="flex items-center justify-between px-8 py-4">
+        <div>
+          <h3 class="text-xl font-semibold text-gray-900">Tableau de bord</h3>
+        </div>
+        <div class="flex items-center space-x-4">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
+            <span class="text-gray-700"
+              >{{ user.firstName }} {{ user.lastName }}</span
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <router-outlet></router-outlet>
+  </main>
+</div>
