@@ -1,0 +1,67 @@
+<main class="flex-1 p-8">
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-8">
+    <h4 class="text-3xl font-bold text-gray-800">Travail Prevu</h4>
+    <div class="flex items-center space-x-4">
+      <button
+        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+      >
+        Generer travail prevu
+      </button>
+    </div>
+  </div>
+
+  <!-- CRUD Table -->
+  <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+    <table class="w-full">
+      <thead class="bg-gray-50">
+        <tr>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+          >
+            Tour de service
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+          >
+            Chauffeur
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+          >
+            Receveur
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+          >
+            Vehicule
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+          >
+            Date
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <!-- Sample Row 1 -->
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-4">301778</td>
+          <td class="px-6 py-4">Mohamed juini</td>
+          <td class="px-6 py-4">Omar Ben Slimane</td>
+          <td class="px-6 py-4">12345678</td>
+          <td class="px-6 py-4">28 Fevrier 2025</td>
+        </tr>
+        <!-- Sample Row 2 -->
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-4">302889</td>
+          <td class="px-6 py-4">Imed Arfaoui</td>
+          <td class="px-6 py-4">Salah saidi</td>
+          <td class="px-6 py-4">14578967</td>
+          <td class="px-6 py-4">28 Fevrier 2025</td>
+        </tr>
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
+  </div>
+</main>

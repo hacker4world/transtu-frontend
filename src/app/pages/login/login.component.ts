@@ -4,12 +4,12 @@ import { AuthenticationService } from '../services/authentication.service';
 import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, CommonModule],
+  imports: [FormsModule, HttpClientModule, CommonModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -32,6 +32,8 @@ export class LoginComponent {
   public login() {
     this.authenticationService.login(this.loginData).subscribe({
       next: (data: any) => {
+        console.log(data);
+
         localStorage.removeItem('user');
         localStorage.setItem('user', JSON.stringify(data.data));
         this.router.navigate(['../dashboard']);
