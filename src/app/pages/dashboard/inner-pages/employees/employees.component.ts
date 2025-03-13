@@ -4,6 +4,7 @@ import { EmployeesService } from '../../../services/employees.service';
 import { CommonModule } from '@angular/common';
 import { CreationModalComponent } from '../../components/creation-modal/creation-modal.component';
 import { FormsModule } from '@angular/forms';
+import { AgentService } from '../../../services/agent.service';
 
 @Component({
   selector: 'app-employees',
@@ -13,60 +14,58 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './employees.component.css',
 })
 export class EmployeesComponent implements OnInit {
-  public user: any = null;
+  agents: any[] = [];  
+  searchQuery: string = ''; 
 
-  public employees: any[] = [];
-
-  public creationModal: boolean = false;
-
-  public nouveauEmployee = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    departementId: 0,
-  };
-
-  constructor(
-    private readonly router: Router,
-    private readonly employeeService: EmployeesService
-  ) {}
+  constructor(private agentService: AgentService) {}
 
   ngOnInit(): void {
-    let user = localStorage.getItem('user');
-    if (!user) this.router.navigate(['../login']);
-    else {
-      this.user = JSON.parse(user);
-      let departement = this.user.departmentId;
-      this.employeeService.fetchEmployees(departement).subscribe({
-        next: (data: any) => {
-          console.log(data.data);
+    this.fetchAgents();
+  }
 
-          this.employees = data.data;
+  fetchAgents(): void {
+    this.agentService.getAllAgents().subscribe(
+      (data) => {
+        this.agents = data;
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des agents:', error);
+      }
+    );
+  }
+
+
+  filteredAgents() {
+    return this.agents.filter(agent => 
+      agent.nom.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      agent.prenom.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      agent.role.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      agent.departement.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+
+ 
+  removeAgent(matricule: number): void {
+    if (confirm('Voulez-vous vraiment supprimer cet agent ?')) {
+      this.agentService.removeAgent(matricule).subscribe(
+        () => {
+          this.agents = this.agents.filter(agent => agent.matricule !== matricule);
+          console.log('Agent supprimé avec succès.');
         },
-      });
+        (error) => {
+          console.error('Erreur lors de la suppression de l’agent:', error);
+        }
+      );
     }
   }
 
-  public creerEmployee() {
-    this.nouveauEmployee.departementId = this.user.departmentId;
-
-    this.employeeService.createNewEmployee(this.nouveauEmployee).subscribe({
-      next: (data: any) => {
-        this.employees.push(data.data);
-        this.setCreationModal(false);
-      },
-    });
+  editAgent(agent: any): void {
+    console.log('Modification de l’agent:', agent);
+  
   }
 
-  public setCreationModal(open: boolean) {
-    this.creationModal = open;
-  }
-
-  public supprimerEmployee(employeeId: number) {
-    this.employeeService.supprimerEmployee(employeeId).subscribe({
-      next: () => {
-        this.employees = this.employees.filter((e) => e.id != employeeId);
-      },
-    });
+  addAgent(): void {
+    console.log('Création d’un nouvel agent');
+  
   }
 }
