@@ -1,37 +1,75 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { EmployeesService } from '../../../services/employees.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AgentService } from '../../../services/agent.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AgentService } from '../../../services/agent.service';
 
 @Component({
   selector: 'app-employees',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './employees.component.html',
-  styleUrl: './employees.component.css',
+  styleUrls: ['./employees.component.css'],
 })
 export class EmployeesComponent implements OnInit {
+
+affaddAgent() {
+  this.showAddModal = true;
+}
   agents: any[] = [];
   searchQuery: string = '';
   showAddModal = false;
-
   showUpdateModal = false;
 
-  newAgent: any = {
+  newAgent = {
+    matricule:0,
     nom: '',
     prenom: '',
+    date_naiss: '',
+    situation_familiale: '',
+    code_emploi_assure: '',
+    code_grade: '',
+    role: '',
+    departement: '',
+  };
+
+  updatedAgent = {
+    
+    nom: '',
+    prenom: '',
+    date_naiss: '',
+    situation_familiale: '',
+    code_emploi_assure: '',
+    code_grade: '',
     role: '',
     departement: '',
   };
 
   roles = ['Chauffeur', 'Receveur'];
+  agentId!: number;
 
-  constructor(private agentService: AgentService) {}
+  constructor(
+    private agentService: AgentService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
 
   ngOnInit(): void {
     this.fetchAgents();
+    
+  }
+  getAgentById(id: number): void {
+    this.showUpdateModal = true;
+    this.agentService.getAgentById(id).subscribe(
+      (data) => {
+        this.newAgent = data;
+        
+      },
+      (error) => {
+        console.error('Error fetching agent data:', error);
+      }
+    );
   }
 
   fetchAgents(): void {
@@ -46,12 +84,14 @@ export class EmployeesComponent implements OnInit {
   }
 
   filteredAgents() {
+  
     return this.agents.filter(
       (agent) =>
         agent.nom.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
         agent.prenom.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
         agent.role.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        agent.departement.toLowerCase().includes(this.searchQuery.toLowerCase())
+        agent.departement.toLowerCase().includes(this.searchQuery.toLowerCase())||
+        agent.matricule.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
 
@@ -71,11 +111,34 @@ export class EmployeesComponent implements OnInit {
     }
   }
 
-  setShowModifyModal() {
-    this.showUpdateModal = true;
+
+  addAgent(matricule: number): void {
+    
+
+    this.agentService.addAgent(this.newAgent).subscribe(
+      (response) => {
+        console.log('Agent ajouté avec succès :', response);
+    
+        this.showAddModal = false;
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout de l\'agent:', error);
+      }
+    );
   }
 
-  addAgent(): void {
-    this.showAddModal = true;
+  updateAgent(agentId: number): void {
+    console.log(agentId);
+    console.log(this.newAgent)
+    
+    this.agentService.updateAgent(agentId, this.newAgent).subscribe(
+      (response) => {
+        console.log('Agent updated successfully:', response);
+        this.showUpdateModal = false;
+      },
+      (error) => {
+        console.error('Error updating agent:', error);
+      }
+    );
   }
 }
