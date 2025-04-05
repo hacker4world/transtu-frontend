@@ -38,7 +38,10 @@
           <td>-</td>
           <td>-</td>
           <td class="action-cell">
-            <button class="button-icon edit">
+            <button
+              (click)="toggleModifierModal(true)"
+              class="button-icon edit"
+            >
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
             <button class="button-icon delete">
@@ -69,4 +72,10 @@
   <app-ajouter-defaillance-modal
     (modalClose)="toggleDefaillancesModal(false)"
   ></app-ajouter-defaillance-modal>
+</div>
+
+<div *ngIf="showModifierDefaillanceModal">
+  <app-modifier-defaillance
+    (modalClose)="toggleModifierModal(false)"
+  ></app-modifier-defaillance>
 </div>
