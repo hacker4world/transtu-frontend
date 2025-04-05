@@ -1,0 +1,57 @@
+<div class="modal-overlay" id="employee-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Ajouter defaillance</h3>
+      <button (click)="closeModal()" class="close-button" id="close-modal">
+        &times;
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group" style="width: 100%">
+          <label class="form-label" for="agentId">Matricule agent</label>
+          <input
+            type="text"
+            class="form-control"
+            name="agentId"
+            placeholder="Entrer matricule de l'agent"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="startDate">Date de début</label>
+          <input type="date" class="form-control" name="startDate" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="endDate">Date de fin</label>
+          <input type="date" class="form-control" name="endDate" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="startHour">Heure de début</label>
+          <input type="time" class="form-control" name="startHour" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="endHour">Heure de fin</label>
+          <input type="time" class="form-control" name="endHour" />
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        class="button button-black"
+        id="cancel-modal"
+        (click)="closeModal()"
+      >
+        Annuler
+      </button>
+      <button class="button button-primary">Enregistrer</button>
+    </div>
+  </div>
+</div>

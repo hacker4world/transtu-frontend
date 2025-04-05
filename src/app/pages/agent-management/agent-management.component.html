@@ -1,0 +1,96 @@
+<div class="top-bar">
+  <h2 class="page-title">Gestion des Agents</h2>
+
+  <div class="action-buttons">
+    <div class="search-bar">
+      <i class="fa-solid fa-search"></i>
+      <input type="text" placeholder="Rechercher des agents..." />
+    </div>
+
+    <button
+      (click)="setAddAgentModal(true)"
+      class="button button-primary"
+      id="add-employee-btn"
+    >
+      <i class="fa-solid fa-plus"></i> Nouvel Agent
+    </button>
+  </div>
+</div>
+
+<div *ngIf="showFetchError" style="width: 100%">
+  <app-warning [message]="'Erreur de récupération des agents'"></app-warning>
+</div>
+
+<div class="card" *ngIf="!showFetchError">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Matricule</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Role</th>
+          <th>Département</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agent of agentList">
+          <td>{{ agent.matricule }}</td>
+          <td>{{ agent.nom }}</td>
+          <td>{{ agent.prenom }}</td>
+          <td>
+            {{ agent.role }}
+          </td>
+          <td>
+            {{ agent.departement }}
+          </td>
+          <td class="action-cell">
+            <button
+              class="button-icon edit"
+              (click)="setAgentToUpdate(agent.matricule)"
+            >
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button
+              (click)="deleteAgent(agent.matricule)"
+              class="button-icon delete"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination">
+    <div class="pagination-info">Affichage de 1 à 8 sur 24 entrées</div>
+    <div class="pagination-controls">
+      <button class="pagination-button disabled">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="pagination-button active">1</button>
+      <button class="pagination-button">2</button>
+      <button class="pagination-button">3</button>
+      <button class="pagination-button">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showAddAgentModal">
+  <app-create-agent-modal
+    (modalClose)="setAddAgentModal(false)"
+    (onAgentCreated)="createAgent($event)"
+  ></app-create-agent-modal>
+</div>
+
+<div *ngIf="showUpdateAgentModal">
+  <app-update-agent-modal
+    [agentData]="agentToUpdate"
+    (modalClose)="setUpdateAgentModal(false)"
+    (onAgentUpdated)="updateAgent($event)"
+  ></app-update-agent-modal>
+</div>

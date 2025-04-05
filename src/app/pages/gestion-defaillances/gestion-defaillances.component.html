@@ -1,0 +1,72 @@
+<div class="top-bar">
+  <h2 class="page-title">Gestion des defaillances</h2>
+
+  <div class="action-buttons">
+    <div class="search-bar">
+      <i class="fa-solid fa-search"></i>
+      <input type="text" placeholder="Rechercher des agents..." />
+    </div>
+
+    <button
+      class="button button-primary"
+      (click)="toggleDefaillancesModal(true)"
+      id="add-employee-btn"
+    >
+      <i class="fa-solid fa-plus"></i> Ajouter defaillance
+    </button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Agent</th>
+          <th>Date debut</th>
+          <th>Date fin</th>
+          <th>Heure debut</th>
+          <th>Heure fin</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td class="action-cell">
+            <button class="button-icon edit">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button class="button-icon delete">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination">
+    <div class="pagination-controls">
+      <button class="pagination-button disabled">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="pagination-button active">1</button>
+      <button class="pagination-button">2</button>
+      <button class="pagination-button">3</button>
+      <button class="pagination-button">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showDefaillancesModal">
+  <app-ajouter-defaillance-modal
+    (modalClose)="toggleDefaillancesModal(false)"
+  ></app-ajouter-defaillance-modal>
+</div>

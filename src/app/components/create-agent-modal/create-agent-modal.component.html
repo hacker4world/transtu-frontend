@@ -1,0 +1,101 @@
+<div class="modal-overlay" id="employee-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Ajouter un Nouvel Agent</h3>
+      <button (click)="onClose()" class="close-button" id="close-modal">
+        &times;
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div *ngIf="error.show">
+        <app-warning [message]="error.message"></app-warning>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="firstName">Nom</label>
+          <input
+            type="text"
+            class="form-control"
+            name="firstName"
+            placeholder="Entrer le nom"
+            [(ngModel)]="agentData.nom"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lastName">Prénom</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastName"
+            placeholder="Entrer le Prénom"
+            [(ngModel)]="agentData.prenom"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="firstName">Date de naissance</label>
+          <input
+            type="date"
+            class="form-control"
+            name="date"
+            [(ngModel)]="agentData.date_naiss"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lastName">Situation Familiale</label>
+          <select
+            class="form-control"
+            name="situation"
+            [(ngModel)]="agentData.situation_familiale"
+          >
+            <option value="celibataire">Célébataire</option>
+            <option value="marie">Marié</option>
+            <option value="divorce">Divorcé</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="firstName">Code emploi assuré</label>
+          <input
+            type="text"
+            class="form-control"
+            name="code_emploi"
+            placeholder="Entrer le code emploi"
+            [(ngModel)]="agentData.code_emploi_assure"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lastName">Code grade</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            placeholder="Entrer le code grade"
+            [(ngModel)]="agentData.code_grade"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="lastName">Role</label>
+        <select class="form-control" name="role" [(ngModel)]="agentData.role">
+          <option value="chauffeur">Chauffeur</option>
+          <option value="receveur">Receveur</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="button button-black" id="cancel-modal" (click)="onClose()">
+        Annuler
+      </button>
+      <button class="button button-primary" (click)="onSubmit()">
+        Enregistrer
+      </button>
+    </div>
+  </div>
+</div>

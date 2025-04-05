@@ -1,0 +1,78 @@
+.sidebar {
+  width: 270px;
+  background-color: var(--bg-sidebar);
+  padding: 20px 0;
+  height: 100vh;
+  position: fixed;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 0 20px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  color: var(--accent-green);
+  font-size: 24px;
+}
+
+.sidebar-nav {
+  margin-top: 20px;
+}
+
+.nav-section {
+  margin-bottom: 16px;
+}
+
+.nav-section-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 8px 20px;
+  letter-spacing: 0.5px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background-color: var(--hover-color);
+  color: var(--text-primary);
+}
+
+.nav-item i {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.nav-item.active {
+  color: var(--text-primary);
+  position: relative;
+}
+
+.nav-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background-color: var(--accent-green);
+}

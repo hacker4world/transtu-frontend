@@ -1,0 +1,62 @@
+<!-- login.component.html -->
+<div class="auth-container">
+  <div class="auth-header">
+    <h2 style="color: var(--accent-green)">TRANSTU</h2>
+
+    <br />
+
+    <h1 class="auth-title">Connectez-vous à votre compte</h1>
+    <p class="auth-subtitle">
+      Entrez vos identifiants pour accéder à votre compte
+    </p>
+  </div>
+
+  <div class="auth-card">
+    <div *ngIf="loginError.show">
+      <app-warning [message]="loginError.message"></app-warning>
+    </div>
+
+    <form>
+      <div class="form-group">
+        <label for="email" class="form-label">Adresse e-mail</label>
+        <input
+          type="email"
+          name="email"
+          class="form-input"
+          placeholder="you@example.com"
+          required
+          [(ngModel)]="loginData.email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Mot de passe</label>
+        <input
+          type="password"
+          name="password"
+          class="form-input"
+          required
+          [(ngModel)]="loginData.password"
+        />
+      </div>
+
+      <div class="form-footer">
+        <div class="checkbox-container">
+          <input type="checkbox" id="remember" class="checkbox-input" />
+          <label for="remember" class="checkbox-label"
+            >Se souvenir de moi</label
+          >
+        </div>
+        <a
+          routerLink="../request-password-reset"
+          style="color: var(--accent-green); text-decoration: none"
+          >Mot de passe oublié ?</a
+        >
+      </div>
+
+      <button type="submit" class="submit-button" (click)="onLogin()">
+        Se connecter
+      </button>
+    </form>
+  </div>
+</div>
