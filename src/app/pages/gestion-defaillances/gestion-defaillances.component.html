@@ -31,12 +31,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
+        <tr *ngFor="let def of defaillances">
+          <td>{{ def.agentNom}}  {{def.agentPrenom}}</td>
+          <td>{{ def.dateDebut }}</td>
+          <td>{{ def.dateFin }}</td>
+          <td>{{ def.heureDebut }}</td>
+          <td>{{ def.heureFin }}</td>
           <td class="action-cell">
             <button
               (click)="toggleModifierModal(true)"
@@ -44,7 +44,10 @@
             >
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
-            <button class="button-icon delete">
+            <button
+              (click)="deleteDefaillance(def.id)"
+              class="button-icon delete"
+            >
               <i class="fa-solid fa-trash"></i>
             </button>
           </td>

@@ -1,7 +1,7 @@
 <div class="modal-overlay" id="employee-modal">
   <div class="modal">
     <div class="modal-header">
-      <h3 class="modal-title">Modifier defaillance</h3>
+      <h3 class="modal-title">Modifier défaillance</h3>
       <button (click)="closeModal()" class="close-button" id="close-modal">
         &times;
       </button>
@@ -16,6 +16,7 @@
             class="form-control"
             name="agentId"
             placeholder="Entrer matricule de l'agent"
+            [(ngModel)]="defaillanceData.agentId" 
           />
         </div>
       </div>
@@ -23,22 +24,42 @@
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="startDate">Date de début</label>
-          <input type="date" class="form-control" name="startDate" />
+          <input
+            type="date"
+            class="form-control"
+            name="startDate"
+            [(ngModel)]="defaillanceData.dateDebut"  
+          />
         </div>
         <div class="form-group">
           <label class="form-label" for="endDate">Date de fin</label>
-          <input type="date" class="form-control" name="endDate" />
+          <input
+            type="date"
+            class="form-control"
+            name="endDate"
+            [(ngModel)]="defaillanceData.dateFin" 
+          />
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="startHour">Heure de début</label>
-          <input type="time" class="form-control" name="startHour" />
+          <input
+            type="time"
+            class="form-control"
+            name="startHour"
+            [(ngModel)]="defaillanceData.heureDebut" 
+          />
         </div>
         <div class="form-group">
           <label class="form-label" for="endHour">Heure de fin</label>
-          <input type="time" class="form-control" name="endHour" />
+          <input
+            type="time"
+            class="form-control"
+            name="endHour"
+            [(ngModel)]="defaillanceData.heureFin"  
+          />
         </div>
       </div>
     </div>
@@ -51,7 +72,7 @@
       >
         Annuler
       </button>
-      <button class="button button-primary">Enregistrer</button>
+      <button class="button button-primary" (click)="onSubmit()">Enregistrer</button> <!-- Appel de la méthode onSubmit -->
     </div>
   </div>
 </div>
