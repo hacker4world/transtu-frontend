@@ -1,0 +1,57 @@
+<div class="top-bar">
+  <h2 class="page-title">Menu Inspecteur</h2>
+
+  <div class="action-buttons">
+    <div class="search-bar">
+      <i class="fa-solid fa-search"></i>
+      <input type="text" placeholder="Rechercher des agents..." />
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Code Service</th>
+          <th>Ligne</th>
+          <th>Type Bareme</th>
+          <th>Chauffeur</th>
+          <th>Receveur</th>
+          <th>Vehicule</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr (click)="toggleUpdateModal(true)">
+          <td>31</td>
+          <td>1</td>
+          <td>hiver</td>
+          <td>45</td>
+          <td>38</td>
+          <td>panier-id</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination">
+    <div class="pagination-controls">
+      <button class="pagination-button disabled">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="pagination-button active">1</button>
+      <button class="pagination-button">2</button>
+      <button class="pagination-button">3</button>
+      <button class="pagination-button">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showUpdateModal">
+  <app-gestion-tourservice-modal
+    (modalClose)="toggleUpdateModal(false)"
+  ></app-gestion-tourservice-modal>
+</div>

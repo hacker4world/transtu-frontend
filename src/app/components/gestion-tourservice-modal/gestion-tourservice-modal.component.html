@@ -1,0 +1,94 @@
+<div class="modal-overlay" id="employee-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Gérer tour de service</h3>
+      <button class="close-button" id="close-modal" (click)="closeModal()">
+        &times;
+      </button>
+    </div>
+
+    <div class="tab-container">
+      <div class="tabs">
+        <button
+          (click)="changeTab('tour')"
+          [ngClass]="{ active: activeTab === 'tour' || !activeTab }"
+          class="tab-button"
+        >
+          Tour de service
+        </button>
+        <button
+          (click)="changeTab('agents')"
+          [ngClass]="{ active: activeTab === 'agents' }"
+          class="tab-button"
+        >
+          Agents
+        </button>
+      </div>
+
+      <div class="tab-content">
+        <div *ngIf="activeTab == 'tour'" class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Contenu Tour de service</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Entrez les détails"
+            />
+          </div>
+        </div>
+        <div *ngIf="activeTab == 'agents'" class="modal-body">
+          <div class="agents-list">
+            <!-- Agent 1 -->
+            <div class="agent-card">
+              <div class="agent-info">
+                <div class="agent-details">
+                  <h4 class="agent-name">Martin Richard</h4>
+                  <p class="agent-position">Chauffeur</p>
+                </div>
+              </div>
+
+              <div class="agent-actions">
+                <button class="btn btn-outline">
+                  <i class="icon-calendar-x"></i>
+                  Déclarer absence
+                </button>
+                <button class="btn btn-outline">
+                  <i class="icon-clock"></i>
+                  Déclarer retard
+                </button>
+              </div>
+            </div>
+
+            <!-- Agent 2 -->
+            <div class="agent-card">
+              <div class="agent-info">
+                <div class="agent-details">
+                  <h4 class="agent-name">Martin Richard</h4>
+                  <p class="agent-position">Chauffeur</p>
+                </div>
+              </div>
+
+              <div class="agent-actions">
+                <button class="btn btn-outline">
+                  <i class="icon-calendar-x"></i>
+                  Déclarer absence
+                </button>
+                <button class="btn btn-outline">
+                  <i class="icon-clock"></i>
+                  Déclarer retard
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">
+          Annuler
+        </button>
+        <button class="btn btn-primary">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>

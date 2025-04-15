@@ -1,0 +1,81 @@
+<div class="top-bar">
+  <h2 class="page-title">Gestion des conges</h2>
+
+  <div class="action-buttons">
+    <div class="search-bar">
+      <i class="fa-solid fa-search"></i>
+      <input type="text" placeholder="Rechercher des agents..." />
+    </div>
+
+    <button
+      (click)="setShowAddCongeModal(true)"
+      class="button button-primary"
+      id="add-employee-btn"
+    >
+      <i class="fa-solid fa-plus"></i> Ajouter congé
+    </button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Agent</th>
+          <th>Date debut</th>
+          <th>Date fin</th>
+          <th>Jours</th>
+          <th>Type</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John Doe</td>
+          <td>2023-10-01</td>
+          <td>2023-10-05</td>
+          <td>5</td>
+          <td>Maladie</td>
+          <td class="action-cell">
+            <button
+              class="button-icon edit"
+              (click)="setShowModifierCongeModal(true)"
+            >
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button class="button-icon delete">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination">
+    <div class="pagination-controls">
+      <button class="pagination-button disabled">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="pagination-button active">1</button>
+      <button class="pagination-button">2</button>
+      <button class="pagination-button">3</button>
+      <button class="pagination-button">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showAddCongeModal">
+  <app-ajouter-conge-modal
+    (modalClose)="setShowAddCongeModal(false)"
+  ></app-ajouter-conge-modal>
+</div>
+
+<div *ngIf="showModifierCongeModal">
+  <app-modifier-conge
+    (modalClose)="setShowModifierCongeModal(false)"
+  ></app-modifier-conge>
+</div>

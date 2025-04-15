@@ -6,6 +6,8 @@ import { RequestPasswordResetComponent } from './pages/request-password-reset/re
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { TravailPrevuComponent } from './pages/travail-prevu/travail-prevu.component';
 import { GestionDefaillancesComponent } from './pages/gestion-defaillances/gestion-defaillances.component';
+import { GestionCongesComponent } from './pages/gestion-conges/gestion-conges.component';
+import { GestionToursServicesComponent } from './pages/gestion-tours-services/gestion-tours-services.component';
 
 export const routes: Routes = [
   {
@@ -44,9 +46,17 @@ export const routes: Routes = [
         component: GestionDefaillancesComponent,
       },
       {
+        path: 'gestion-conges',
+        component: GestionCongesComponent
+      },
+      {
         path: 'prevu',
         component: TravailPrevuComponent,
       },
+      {
+        path: 'tours-services',
+        component: GestionToursServicesComponent
+      }
     ],
   },
 ];

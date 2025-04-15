@@ -1,0 +1,52 @@
+<div class="modal-overlay" id="employee-modal">
+  <div class="modal">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h3 class="modal-title">Modifier congé</h3>
+      <button class="close-button" id="close-modal" (click)="onClose()">
+        &times;
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+      <!-- Matricule agent -->
+      <div class="form-row">
+        <div class="form-group" style="width: 100%">
+          <label for="agentId">Matricule agent</label>
+          <input
+            type="text"
+            class="form-control"
+            name="agentId"
+            placeholder="Entrer matricule de l'agent"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Dates -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="startDate">Date de début</label>
+          <input type="date" class="form-control" name="startDate" required />
+        </div>
+        <div class="form-group">
+          <label for="endDate">Date de fin</label>
+          <input type="date" class="form-control" name="endDate" required />
+        </div>
+      </div>
+
+      <!-- Heures -->
+      <div class="form-group">
+        <label class="form-label" for="lastName">Type de congé</label>
+        <select class="form-control" name="role"></select>
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+      <button class="button button-black" (click)="onClose()">Annuler</button>
+      <button class="button button-primary">Enregistrer</button>
+    </div>
+  </div>
+</div>
