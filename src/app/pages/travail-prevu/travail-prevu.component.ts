@@ -13,7 +13,14 @@ import { WarningComponent } from '../../components/warning/warning.component';
 })
 export class TravailPrevuComponent implements OnInit {
   public toursServices: TourServiceResponse[] = [];
-  public tomorrowDate: string = '';
+  public targetDate = {
+    day: 0,
+    month: 0,
+    year: 0,
+    dayCode: 0,
+  };
+
+  public userEmail = '';
 
   public error = {
     message: '',
@@ -23,34 +30,43 @@ export class TravailPrevuComponent implements OnInit {
   constructor(private readonly tourServiceService: TourServiceService) {}
 
   ngOnInit(): void {
-    this.tomorrowDate = this.getTomorrow();
-    console.log(this.tomorrowDate);
+    this.targetDate = this.getTomorrowDate();
 
-    this.tourServiceService.getToursByDate(this.tomorrowDate).subscribe({
-      next: (response) => {
-        this.toursServices = response;
-      },
-    });
+    let user = JSON.parse(localStorage.getItem('user')!);
+
+    this.userEmail = user.email;
   }
 
-  public genererTravailPrevu() {
-    this.tourServiceService.genererTravailPrevu().subscribe({
+  public genererPrevu() {
+    this.tourServiceService.genererTravailPrevu({
+      ...this.targetDate,
+      email: this.userEmail,
+    })
+    .subscribe({
       next: (response) => {
         this.toursServices = response;
-      },
-    });
+      }
+    })
   }
 
-  private getTomorrow() {
+  private getTomorrowDate() {
     const today = new Date();
 
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
 
-    const day = tomorrow.getDate().toString().padStart(2, '0');
-    const month = (tomorrow.getMonth() + 1).toString().padStart(2, '0');
+    const day = tomorrow.getDate();
+    const month = tomorrow.getMonth() + 1;
     const year = tomorrow.getFullYear();
 
-    return `${day}-${month}-${year}`;
+    let dayCode = tomorrow.getDay();
+    dayCode = dayCode === 0 ? 7 : dayCode;
+
+    return {
+      day,
+      month,
+      year,
+      dayCode,
+    };
   }
 }

@@ -17,9 +17,10 @@ export class TourServiceService {
     );
   }
 
-  public genererTravailPrevu(): Observable<TourServiceResponse[]> {
-    return this.httpClient.get<TourServiceResponse[]>(
-      this.url + '/generer-travail-prevu'
+  public genererTravailPrevu(data: any): Observable<TourServiceResponse[]> {
+    return this.httpClient.post<TourServiceResponse[]>(
+      this.url + '/prevu',
+      data
     );
   }
 }

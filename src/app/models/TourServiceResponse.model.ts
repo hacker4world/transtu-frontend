@@ -1,8 +1,7 @@
 export interface TourServiceResponse {
-  code_service: number;
-  type_bareme: string;
-  chauffeur: number;
-  receveur: number;
-  ligne: number;
-  panier: string;
+  driver: string;
+  receiver: string;
+  heuresJour: number;
+  heuresNuit: number;
+  saison: string;
 }

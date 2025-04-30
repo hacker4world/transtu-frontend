@@ -3,9 +3,9 @@
 
   <div class="action-buttons">
     <button
+      (click)="genererPrevu()"
       class="button button-primary"
       id="add-employee-btn"
-      (click)="genererTravailPrevu()"
     >
       <i class="fa-solid fa-plus"></i> Générer travail prévu
     </button>
@@ -22,22 +22,20 @@
     <table>
       <thead>
         <tr>
-          <th>Code Service</th>
-          <th>Ligne</th>
-          <th>Type Bareme</th>
           <th>Chauffeur</th>
           <th>Receveur</th>
-          <th>Vehicule</th>
+          <th>Heures Jour</th>
+          <th>Heures Nuit</th>
+          <th>Saison</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let tour of toursServices">
-          <td>{{ tour.code_service }}</td>
-          <td>{{ tour.ligne }}</td>
-          <td>{{ tour.type_bareme }}</td>
-          <td>{{ tour.chauffeur }}</td>
-          <td>{{ tour.receveur }}</td>
-          <td>{{ tour.panier }}</td>
+          <td>{{ tour.driver }}</td>
+          <td>{{ tour.receiver }}</td>
+          <td>{{ tour.heuresJour }}</td>
+          <td>{{ tour.heuresNuit }}</td>
+          <td>{{ tour.saison }}</td>
         </tr>
       </tbody>
     </table>
@@ -45,7 +43,8 @@
 
   <div class="pagination">
     <div class="pagination-info">
-      Travail prevu pour date : {{ tomorrowDate }}
+      Travail prevu pour date : {{ targetDate.day }} / {{ targetDate.month }} /
+      {{ targetDate.year }}
     </div>
   </div>
 </div>
