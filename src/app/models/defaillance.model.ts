@@ -5,8 +5,5 @@ export interface Defaillance {
   nombre_jour: number;
   dateDebut: string;
   dateFin: string;
-  heureDebut: string;
-  heureFin: string;
-  nbre_heure: number;
   agentId: number;
 }

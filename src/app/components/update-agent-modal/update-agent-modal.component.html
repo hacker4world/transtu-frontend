@@ -1,7 +1,7 @@
 <div class="modal-overlay" id="employee-modal">
   <div class="modal">
     <div class="modal-header">
-      <h3 class="modal-title">Ajouter un Nouvel Agent</h3>
+      <h3 class="modal-title">Modifier Agent</h3>
       <button (click)="onClose()" class="close-button" id="close-modal">
         &times;
       </button>
@@ -41,6 +41,7 @@
             type="date"
             class="form-control"
             name="date"
+            [value]="agentData.date_naiss"
             [(ngModel)]="agentData.date_naiss"
           />
         </div>
@@ -49,6 +50,7 @@
           <select
             class="form-control"
             name="situation"
+            [value]="agentData.situation_familiale"
             [(ngModel)]="agentData.situation_familiale"
           >
             <option value="celibataire">Célébataire</option>
@@ -83,9 +85,14 @@
 
       <div class="form-group">
         <label class="form-label" for="lastName">Role</label>
-        <select class="form-control" name="role" [(ngModel)]="agentData.role">
-          <option value="chauffeur">Chauffeur</option>
-          <option value="receveur">Receveur</option>
+        <select
+          class="form-control"
+          name="role"
+          [(ngModel)]="agentData.role"
+          [value]="agentData.role"
+        >
+          <option value="driver">Chauffeur</option>
+          <option value="receiver">Receveur</option>
         </select>
       </div>
     </div>

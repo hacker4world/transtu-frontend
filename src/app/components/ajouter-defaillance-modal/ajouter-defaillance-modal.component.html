@@ -3,11 +3,16 @@
     <!-- Modal Header -->
     <div class="modal-header">
       <h3 class="modal-title">Ajouter défaillance</h3>
-      <button (click)="closeModal()" class="close-button" id="close-modal">&times;</button>
+      <button (click)="closeModal()" class="close-button" id="close-modal">
+        &times;
+      </button>
     </div>
 
     <!-- Modal Body -->
     <div class="modal-body">
+      <div *ngIf="modalError.show">
+        <app-warning [message]="modalError.message"></app-warning>
+      </div>
       <!-- Matricule agent -->
       <div class="form-row">
         <div class="form-group" style="width: 100%">
@@ -46,38 +51,16 @@
           />
         </div>
       </div>
-
-      <!-- Heures -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="startHour">Heure de début</label>
-          <input
-            type="time"
-            class="form-control"
-            name="startHour"
-            [(ngModel)]="defaillance.heureDebut"
-            [disabled]="defaillance.dateDebut !== defaillance.dateFin"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="endHour">Heure de fin</label>
-          <input
-            type="time"
-            class="form-control"
-            name="endHour"
-            [(ngModel)]="defaillance.heureFin"
-            [disabled]="defaillance.dateDebut !== defaillance.dateFin"
-            required
-          />
-        </div>
-      </div>
     </div>
 
     <!-- Modal Footer -->
     <div class="modal-footer">
-      <button class="button button-black" (click)="closeModal()">Annuler</button>
-      <button class="button button-primary" (click)="addDefaillance()">Enregistrer</button>
+      <button class="button button-black" (click)="closeModal()">
+        Annuler
+      </button>
+      <button class="button button-primary" (click)="addDefaillance()">
+        Enregistrer
+      </button>
     </div>
   </div>
 </div>

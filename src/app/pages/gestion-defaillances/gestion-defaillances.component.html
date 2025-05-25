@@ -2,17 +2,12 @@
   <h2 class="page-title">Gestion des defaillances</h2>
 
   <div class="action-buttons">
-    <div class="search-bar">
-      <i class="fa-solid fa-search"></i>
-      <input type="text" placeholder="Rechercher des agents..." />
-    </div>
-
     <button
       class="button button-primary"
       (click)="toggleDefaillancesModal(true)"
       id="add-employee-btn"
     >
-      <i class="fa-solid fa-plus"></i> Ajouter defaillance
+      <i class="fa-solid fa-plus"></i> Nouvel defaillance
     </button>
   </div>
 </div>
@@ -25,27 +20,23 @@
           <th>Agent</th>
           <th>Date debut</th>
           <th>Date fin</th>
-          <th>Heure debut</th>
-          <th>Heure fin</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let def of defaillances">
-          <td>{{ def.agentNom}}  {{def.agentPrenom}}</td>
+          <td>{{ def.agentNom }} {{ def.agentPrenom }}</td>
           <td>{{ def.dateDebut }}</td>
           <td>{{ def.dateFin }}</td>
-          <td>{{ def.heureDebut }}</td>
-          <td>{{ def.heureFin }}</td>
           <td class="action-cell">
             <button
-              (click)="toggleModifierModal(true)"
+              (click)="setDefaillanceToUpdate(def.id)"
               class="button-icon edit"
             >
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
             <button
-              (click)="deleteDefaillance(def.id)"
+              (click)="setDefaillanceToDelete(def.id)"
               class="button-icon delete"
             >
               <i class="fa-solid fa-trash"></i>
@@ -56,29 +47,26 @@
     </table>
   </div>
 
-  <div class="pagination">
-    <div class="pagination-controls">
-      <button class="pagination-button disabled">
-        <i class="fa-solid fa-chevron-left"></i>
-      </button>
-      <button class="pagination-button active">1</button>
-      <button class="pagination-button">2</button>
-      <button class="pagination-button">3</button>
-      <button class="pagination-button">
-        <i class="fa-solid fa-chevron-right"></i>
-      </button>
-    </div>
+  <div *ngIf="showDefaillancesModal">
+    <app-ajouter-defaillance-modal
+      (modalClose)="toggleDefaillancesModal(false)"
+      (defaillanceCreated)="addDefaillance($event)"
+    ></app-ajouter-defaillance-modal>
+  </div>
+
+  <div *ngIf="showModifierDefaillanceModal">
+    <app-modifier-defaillance
+      (modalClose)="toggleModifierModal(false)"
+      [defaillanceData]="defaillanceToUpdate"
+      (onDefaillanceUpdated)="updateDefaillance($event)"
+    ></app-modifier-defaillance>
   </div>
 </div>
 
-<div *ngIf="showDefaillancesModal">
-  <app-ajouter-defaillance-modal
-    (modalClose)="toggleDefaillancesModal(false)"
-  ></app-ajouter-defaillance-modal>
-</div>
-
-<div *ngIf="showModifierDefaillanceModal">
-  <app-modifier-defaillance
-    (modalClose)="toggleModifierModal(false)"
-  ></app-modifier-defaillance>
+<div *ngIf="showConfirmationModal">
+  <app-delete-confirm-modal
+    message="Êtes-vous sûr de vouloir supprimer cet defaillance ?"
+    (onClose)="closeConfirmation()"
+    (onConfirm)="deleteDefaillance()"
+  ></app-delete-confirm-modal>
 </div>

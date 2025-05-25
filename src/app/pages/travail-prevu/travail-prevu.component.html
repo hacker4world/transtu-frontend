@@ -1,6 +1,11 @@
 <div class="top-bar">
   <h2 class="page-title">Travail Prevu</h2>
 
+  <p>
+    Travail prevu pour date : {{ targetDate.day }} / {{ targetDate.month }} /
+    {{ targetDate.year }}
+  </p>
+
   <div class="action-buttons">
     <button
       (click)="genererPrevu()"
@@ -26,25 +31,16 @@
           <th>Receveur</th>
           <th>Heures Jour</th>
           <th>Heures Nuit</th>
-          <th>Saison</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let tour of toursServices">
           <td>{{ tour.driver }}</td>
           <td>{{ tour.receiver }}</td>
-          <td>{{ tour.heuresJour }}</td>
-          <td>{{ tour.heuresNuit }}</td>
-          <td>{{ tour.saison }}</td>
+          <td>{{ tour.heures_jour }}</td>
+          <td>{{ tour.heures_nuit }}</td>
         </tr>
       </tbody>
     </table>
-  </div>
-
-  <div class="pagination">
-    <div class="pagination-info">
-      Travail prevu pour date : {{ targetDate.day }} / {{ targetDate.month }} /
-      {{ targetDate.year }}
-    </div>
   </div>
 </div>

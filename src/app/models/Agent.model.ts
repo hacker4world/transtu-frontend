@@ -7,6 +7,6 @@ export interface Agent {
   code_emploi_assure: string;
   code_grade: string;
   role: string;
-  departement: any;
+  district: any;
   adminId: number;
 }

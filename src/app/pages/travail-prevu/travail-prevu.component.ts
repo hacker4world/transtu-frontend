@@ -35,18 +35,36 @@ export class TravailPrevuComponent implements OnInit {
     let user = JSON.parse(localStorage.getItem('user')!);
 
     this.userEmail = user.email;
+
+    this.tourServiceService
+      .getToursByDate(
+        this.targetDate.day,
+        this.targetDate.month,
+        this.targetDate.year,
+        this.userEmail
+      )
+      .subscribe({
+        next: (response: any) => {
+          console.log(response.data);
+
+          this.toursServices = response.data;
+        },
+      });
   }
 
   public genererPrevu() {
-    this.tourServiceService.genererTravailPrevu({
-      ...this.targetDate,
-      email: this.userEmail,
-    })
-    .subscribe({
-      next: (response) => {
-        this.toursServices = response;
-      }
-    })
+    this.tourServiceService
+      .genererTravailPrevu({
+        ...this.targetDate,
+        email: this.userEmail,
+      })
+      .subscribe({
+        next: (response: any) => {
+          console.log(response.data);
+
+          this.toursServices = response.data;
+        },
+      });
   }
 
   private getTomorrowDate() {

@@ -1,0 +1,22 @@
+<div class="modal-overlay" id="employee-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Confirmation de suppression</h3>
+      <button class="close-button" id="close-modal" (click)="close()">
+        &times;
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <p>{{ message }}</p>
+    </div>
+    <div class="modal-footer">
+      <button class="button button-black" id="cancel-modal" (click)="close()">
+        Annuler
+      </button>
+      <button class="button button-danger" (click)="confirm()">
+        Supprimer
+      </button>
+    </div>
+  </div>
+</div>

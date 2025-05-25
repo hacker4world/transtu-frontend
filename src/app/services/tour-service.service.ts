@@ -11,13 +11,23 @@ export class TourServiceService {
 
   constructor(private httpClient: HttpClient) {}
 
-  public getToursByDate(date: string): Observable<TourServiceResponse[]> {
-    return this.httpClient.get<TourServiceResponse[]>(
-      this.url + '/get-tours/' + date
-    );
+  public getToursByDate(
+    day: number,
+    month: number,
+    year: number,
+    email: string
+  ): Observable<TourServiceResponse[]> {
+    return this.httpClient.post<TourServiceResponse[]>(this.url + '/tours', {
+      day,
+      month,
+      year,
+      email,
+    });
   }
 
   public genererTravailPrevu(data: any): Observable<TourServiceResponse[]> {
+    console.log(data);
+
     return this.httpClient.post<TourServiceResponse[]>(
       this.url + '/prevu',
       data

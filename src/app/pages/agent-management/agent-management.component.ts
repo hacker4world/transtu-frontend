@@ -5,6 +5,7 @@ import { Agent } from '../../models/Agent.model';
 import { WarningComponent } from '../../components/warning/warning.component';
 import { CreateAgentModalComponent } from '../../components/create-agent-modal/create-agent-modal.component';
 import { UpdateAgentModalComponent } from '../../components/update-agent-modal/update-agent-modal.component';
+import { DeleteConfirmModalComponent } from '../../components/delete-confirm-modal/delete-confirm-modal.component';
 
 @Component({
   selector: 'app-agent-management',
@@ -14,6 +15,7 @@ import { UpdateAgentModalComponent } from '../../components/update-agent-modal/u
     WarningComponent,
     CreateAgentModalComponent,
     UpdateAgentModalComponent,
+    DeleteConfirmModalComponent,
   ],
   templateUrl: './agent-management.component.html',
   styleUrl: './agent-management.component.css',
@@ -27,6 +29,10 @@ export class AgentManagementComponent implements OnInit {
 
   public showAddAgentModal = false;
   public showUpdateAgentModal = false;
+
+  public showDeleteConfirmation = false;
+
+  public agentToDelete = 0;
 
   public agentToUpdate: Agent = this.agentList[0];
 
@@ -50,14 +56,28 @@ export class AgentManagementComponent implements OnInit {
   }
 
   public createAgent(agentData: Agent): void {
-    this.agentList.push(agentData);
+    this.agentList.push({
+      ...agentData,
+      district: agentData.district.name,
+    });
   }
 
-  public deleteAgent(id: number): void {
-    this.agentsService.deleteAgent(id).subscribe({
+  public setAgentToDelete(id: number) {
+    this.agentToDelete = id;
+    this.showDeleteConfirmation = true;
+  }
+
+  public closeConfirmation() {
+    this.showDeleteConfirmation = false;
+  }
+
+  public deleteAgent(): void {
+    this.closeConfirmation();
+
+    this.agentsService.deleteAgent(this.agentToDelete).subscribe({
       next: () => {
         this.agentList = this.agentList.filter(
-          (agent) => agent.matricule != id
+          (agent) => agent.matricule != this.agentToDelete
         );
       },
       error: () => {

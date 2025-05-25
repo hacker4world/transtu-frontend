@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AgentsService } from '../../services/agents.service';
 import { Agent } from '../../models/Agent.model';
 import { WarningComponent } from '../warning/warning.component';
@@ -12,11 +12,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './update-agent-modal.component.html',
   styleUrl: './update-agent-modal.component.css',
 })
-export class UpdateAgentModalComponent {
+export class UpdateAgentModalComponent implements OnInit {
   @Input() public agentData!: Agent;
 
   @Output() public modalClose = new EventEmitter();
   @Output() public onAgentUpdated = new EventEmitter<Agent>();
+
+  ngOnInit(): void {
+    console.log(this.agentData);
+  }
 
   public error = {
     show: false,

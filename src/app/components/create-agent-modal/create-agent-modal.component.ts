@@ -25,7 +25,7 @@ export class CreateAgentModalComponent {
     code_emploi_assure: '',
     code_grade: '',
     role: '',
-    departement: '',
+    district: '',
     matricule: 0,
     adminId: 0,
   };
