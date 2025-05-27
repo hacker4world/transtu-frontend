@@ -17,8 +17,8 @@ export class CongeService {
     return this.httpClient.get(this.url + '/all');
   }
 
-  public updateConge() {
-    
+  public updateConge(data: any) {
+    return this.httpClient.post(this.url + "/modifier", data)
   }
 
   public deleteConge(id: any) {

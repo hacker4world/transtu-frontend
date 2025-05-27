@@ -74,7 +74,10 @@ export class GestionCongesComponent implements OnInit {
     this.showDeleteConfirmation = false;
   }
 
-  updateConge() {
-    
+  updateConge(congeData: any) {
+    this.conges = this.conges.map(c => {
+      if (c.id === congeData.id) return {...congeData}
+      else return c;
+    })
   }
 }

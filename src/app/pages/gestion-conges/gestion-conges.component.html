@@ -61,6 +61,7 @@
   <app-modifier-conge
     [congeData]="congeToUpdate"
     (modalClose)="setShowModifierCongeModal(false)"
+    (congeUpdated)="updateConge($event)"
   ></app-modifier-conge>
 </div>
 
