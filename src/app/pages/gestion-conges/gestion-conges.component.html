@@ -21,25 +21,26 @@
           <th>Date debut</th>
           <th>Date fin</th>
           <th>Jours</th>
-          <th>Type</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Ahmed Juini</td>
-          <td>2023-10-01</td>
-          <td>2023-10-05</td>
-          <td>5</td>
-          <td>Maladie</td>
+        <tr *ngFor="let conge of conges">
+          <td>{{ conge.agentName }}</td>
+          <td>{{ conge.dateDebut }}</td>
+          <td>{{ conge.dateFin }}</td>
+          <td>{{ conge.nbrJours }}</td>
           <td class="action-cell">
             <button
               class="button-icon edit"
-              (click)="setShowModifierCongeModal(true)"
+              (click)="setCongeToUpdate(conge.id)"
             >
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
-            <button class="button-icon delete">
+            <button
+              class="button-icon delete"
+              (click)="setCongeToDelete(conge.id)"
+            >
               <i class="fa-solid fa-trash"></i>
             </button>
           </td>
@@ -52,11 +53,22 @@
 <div *ngIf="showAddCongeModal">
   <app-ajouter-conge-modal
     (modalClose)="setShowAddCongeModal(false)"
+    (congeCreated)="creerConge($event)"
   ></app-ajouter-conge-modal>
 </div>
 
 <div *ngIf="showModifierCongeModal">
   <app-modifier-conge
+    [congeData]="congeToUpdate"
     (modalClose)="setShowModifierCongeModal(false)"
   ></app-modifier-conge>
+</div>
+
+<div *ngIf="showDeleteConfirmation">
+  <app-delete-confirm-modal
+    (onClose)="closeDeleteConfirmation()"
+    (onConfirm)="deleteConge()"
+    message="Êtes-vous sûr de vouloir supprimer cet congé ?"
+  >
+  </app-delete-confirm-modal>
 </div>

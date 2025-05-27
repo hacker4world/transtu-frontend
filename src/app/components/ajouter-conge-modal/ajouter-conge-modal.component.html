@@ -11,6 +11,11 @@
     <!-- Modal Body -->
     <div class="modal-body">
       <!-- Matricule agent -->
+
+      <div *ngIf="error.show">
+        <app-warning [message]="error.message"></app-warning>
+      </div>
+
       <div class="form-row">
         <div class="form-group" style="width: 100%">
           <label for="agentId">Matricule agent</label>
@@ -19,6 +24,7 @@
             class="form-control"
             name="agentId"
             placeholder="Entrer matricule de l'agent"
+            [(ngModel)]="congeData.agentId"
             required
           />
         </div>
@@ -28,25 +34,33 @@
       <div class="form-row">
         <div class="form-group">
           <label for="startDate">Date de début</label>
-          <input type="date" class="form-control" name="startDate" required />
+          <input
+            type="date"
+            class="form-control"
+            name="startDate"
+            required
+            [(ngModel)]="congeData.dateDebut"
+          />
         </div>
         <div class="form-group">
           <label for="endDate">Date de fin</label>
-          <input type="date" class="form-control" name="endDate" required />
+          <input
+            type="date"
+            class="form-control"
+            name="endDate"
+            required
+            [(ngModel)]="congeData.dateFin"
+          />
         </div>
-      </div>
-
-      <!-- Heures -->
-      <div class="form-group">
-        <label class="form-label" for="lastName">Type de congé</label>
-        <select class="form-control" name="role"></select>
       </div>
     </div>
 
     <!-- Modal Footer -->
     <div class="modal-footer">
       <button class="button button-black" (click)="onClose()">Annuler</button>
-      <button class="button button-primary">Enregistrer</button>
+      <button class="button button-primary" (click)="addConge()">
+        Enregistrer
+      </button>
     </div>
   </div>
 </div>
