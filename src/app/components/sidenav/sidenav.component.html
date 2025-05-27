@@ -1,33 +1,54 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="logo">
-      <i class="fa-solid fa-users logo-icon"></i>
-      <span>Transtu</span>
+      <i class="fa-solid fa-bus logo-icon"></i>
+      <span>Transtu administrateur</span>
     </div>
   </div>
 
   <nav class="sidebar-nav">
     <div class="nav-section">
       <div class="nav-section-title">Menu Admin</div>
-      <a class="nav-item active" routerLink="./agents">
+      <a class="nav-item" [class.active]="route == '/dashboard/agents'" routerLink="./agents">
         <i class="fa-solid fa-users"></i>
         <span>Gestion des agents</span>
       </a>
-      <a class="nav-item" routerLink="./gestion-defaillances">
+      <a class="nav-item" [class.active]="route == '/dashboard/gestion-defaillances'" routerLink="./gestion-defaillances">
         <i class="fa-solid fa-list-check"></i>
         <span>Gestion des defaillances</span>
       </a>
-      <a class="nav-item" routerLink="./gestion-conges">
+      <a class="nav-item" routerLink="./gestion-conges" [class.active]="route == '/dashboard/gestion-conges'" >
         <i class="fa-solid fa-paper-plane"></i>
         <span>Gestion des conges</span>
       </a>
       
-      <a class="nav-item" routerLink="./prevu">
+      <a class="nav-item" routerLink="./prevu" [class.active]="route == '/dashboard/prevu'" >
         <i class="fa-solid fa-calendar-days"></i>
         <span>Travail prévu</span>
       </a>
     </div>
 
+    <div class="nav-section-title">Pointage</div>
+
+    <a class="nav-item" [class.active]="route == '/dashboard/heures'" routerLink="./heures">
+      <i class="fa-solid fa-clock"></i>
+      <span>Heures de travail</span>
+    </a>
+
+    <a class="nav-item" [class.active]="route == '/dashboard/absences'" routerLink="./absences">
+      <i class="fa-solid fa-door-open"></i>
+      <span>Absences</span>
+    </a>
+
+    <a class="nav-item" [class.active]="route == '/dashboard/retards'" routerLink="./retards">
+      <i class="fa-solid fa-user-clock"></i>
+      <span>Retards</span>
+    </a>
+
+    <a class="nav-item" style="color: red;" (click)="logout()" >
+      <i class="fa-solid fa-sign-out-alt"></i>
+      <span>Se deconnecter</span>
+    </a>
     
   </nav>
 </aside>

@@ -8,6 +8,9 @@ import { TravailPrevuComponent } from './pages/travail-prevu/travail-prevu.compo
 import { GestionDefaillancesComponent } from './pages/gestion-defaillances/gestion-defaillances.component';
 import { GestionCongesComponent } from './pages/gestion-conges/gestion-conges.component';
 import { GestionToursServicesComponent } from './pages/gestion-tours-services/gestion-tours-services.component';
+import { HeuresComponent } from './pages/heures/heures.component';
+import { AbsencesComponent } from './pages/absences/absences.component';
+import { RetardsComponent } from './pages/retards/retards.component';
 
 export const routes: Routes = [
   {
@@ -56,6 +59,18 @@ export const routes: Routes = [
       {
         path: 'tours-services',
         component: GestionToursServicesComponent
+      },
+      {
+        path: 'heures',
+        component: HeuresComponent
+      },
+      {
+        path: 'absences',
+        component: AbsencesComponent,
+      },
+      {
+        path: 'retards',
+        component: RetardsComponent
       }
     ],
   },
