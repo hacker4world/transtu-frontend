@@ -22,4 +22,7 @@ export class AbsencesComponent implements OnInit {
       },
     });
   }
+
+  
+
 }

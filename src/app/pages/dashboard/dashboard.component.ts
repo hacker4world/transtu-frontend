@@ -1,13 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from '../../components/sidenav/sidenav.component';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CreateAgentModalComponent } from "../../components/create-agent-modal/create-agent-modal.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [SidenavComponent, RouterOutlet, CreateAgentModalComponent],
+  imports: [SidenavComponent, RouterOutlet, CreateAgentModalComponent, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent {}
+export class DashboardComponent implements OnInit {
+
+  constructor(private readonly router: Router) {}
+
+  ngOnInit(): void {
+      let user = localStorage.getItem("user");
+      if (!user) this.router.navigate(["../login"])
+  }
+}

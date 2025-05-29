@@ -35,4 +35,9 @@ export class AgentsService {
       agentData
     );
   }
+
+  public calculHeures(data: any) {
+    return this.httpClient.post("http://localhost:8080/api/pointage/heures", data);
+  }
+
 }

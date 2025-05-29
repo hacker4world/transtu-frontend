@@ -1,3 +1,44 @@
 <div class="top-bar">
     <h2 class="page-title">Heures de travail</h2>
+
+    <div class="action-buttons">
+        <button
+          (click)="setModal(true)"
+          class="button button-primary"
+          id="add-employee-btn"
+        >
+          <i class="fa-solid fa-plus"></i> Filtrer
+        </button>
+      </div>
+</div>
+
+<div class="card">
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Agent</th>
+            <th>Heures jour</th>
+            <th>Heures nuit</th>
+            <th>Jours absences</th>
+            <th>Jours defaillances</th>
+            <th>Jours conges</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="data.agentName != ''">
+            <td>{{ data.agentName }}</td>
+            <td>{{ data.heures_jour }}</td>
+            <td>{{ data.heures_nuit }}</td>
+            <td>{{ data.jours_absences }}</td>
+            <td>{{ data.jours_defaillances }}</td>
+            <td>{{ data.jours_conges }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<div *ngIf="modal">
+    <app-heures-modal (modalClose)="setModal(false)" (onData)="setData($event)" ></app-heures-modal>
 </div>
