@@ -12,7 +12,10 @@
           </tr>
         </thead>
         <tbody>
-          
+          <tr *ngFor="let absence of absences" >
+            <td>{{ absence.agentName }}</td>
+            <td> {{ absence.day }} / {{ absence.month }} / {{ absence.year }} </td>
+          </tr>
         </tbody>
       </table>
     </div>

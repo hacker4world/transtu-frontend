@@ -1,3 +1,26 @@
 <div class="top-bar">
-    <h2 class="page-title">Retards</h2>
+  <h2 class="page-title">Retards</h2>
+</div>
+
+<div class="card">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Agent</th>
+          <th>Date</th>
+          <th>Heures</th>
+          <th>Minutes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let retard of retards">
+          <td>{{ retard.agentName }}</td>
+          <td>{{ retard.day }} / {{ retard.month }} / {{ retard.year }}</td>
+          <td>{{ retard.hours }}</td>
+          <td>{{ retard.minutes }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
