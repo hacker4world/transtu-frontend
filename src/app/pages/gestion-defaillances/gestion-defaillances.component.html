@@ -3,10 +3,12 @@
 
   <div class="action-buttons">
 
-    <div class="search-bar">
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="Recherche Defaillance">
-    </div>
+    <form (ngSubmit)="onSearch()">
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input [(ngModel)]="searchInput" name="searchInput" type="text" placeholder="Recherche Defaillance">
+      </div>
+    </form>
 
     <button
       class="button button-primary"

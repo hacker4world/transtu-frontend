@@ -5,6 +5,7 @@ import { ModifierDefaillanceComponent } from '../../components/modifier-defailla
 import { Defaillance } from '../../models/defaillance.model';
 import { DefaillanceService } from '../../services/defaillance.service';
 import { DeleteConfirmModalComponent } from '../../components/delete-confirm-modal/delete-confirm-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-gestion-defaillances',
@@ -14,13 +15,16 @@ import { DeleteConfirmModalComponent } from '../../components/delete-confirm-mod
     CommonModule,
     ModifierDefaillanceComponent,
     DeleteConfirmModalComponent,
+    FormsModule
   ],
   templateUrl: './gestion-defaillances.component.html',
   styleUrl: './gestion-defaillances.component.css',
 })
 export class GestionDefaillancesComponent {
+  public searchInput: string = "";
   public showDefaillancesModal = false;
   public showModifierDefaillanceModal = false;
+  public allDefaillances: Defaillance[] = [];
   public defaillances: Defaillance[] = [];
   public defaillanceToUpdate: any = null;
   public defaillanceToDelete: any = null;
@@ -43,6 +47,7 @@ export class GestionDefaillancesComponent {
         console.log('Réponse complète:', res);
         if (Array.isArray(res)) {
           this.defaillances = res;
+          this.allDefaillances = res;
           console.log('Défaillances:', this.defaillances);
         } else {
           console.error("La réponse n'est pas un tableau de défaillances.");
@@ -96,5 +101,33 @@ export class GestionDefaillancesComponent {
           console.error('Erreur lors de la suppression', err);
         },
       });
+  }
+
+  public onSearch() {
+    if (this.searchInput.trim() == "") {
+      this.defaillances = this.allDefaillances;
+    } else {
+      let numeric = this.isNumeric(this.searchInput.trim())
+      if (!numeric) {
+        this.defaillances = this.allDefaillances.filter(defaillance => {
+          return defaillance.agentNom.toLowerCase().includes(this.searchInput.trim().toLowerCase()) || 
+          defaillance.agentPrenom.toLowerCase().includes(this.searchInput.trim().toLowerCase()) ||
+          (defaillance.agentNom + " " + defaillance.agentPrenom).toLowerCase().includes(this.searchInput.trim().toLowerCase())
+        })
+      }
+      else this.defaillances = this.allDefaillances.filter(defaillance => defaillance.agentId == Number(this.searchInput));
+    }
+    
+  }
+
+  private isNumeric(searchInput: string) {
+    let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+    for(let i = 0; i < searchInput.length; i++) {
+      if (!numbers.includes(searchInput[i])) {
+        return false;
+      }
+    }
+    return true;
   }
 }
