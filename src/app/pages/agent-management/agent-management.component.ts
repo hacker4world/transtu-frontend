@@ -18,7 +18,7 @@ import { RetardService } from '../../services/retard.service';
     CreateAgentModalComponent,
     UpdateAgentModalComponent,
     DeleteConfirmModalComponent,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './agent-management.component.html',
   styleUrl: './agent-management.component.css',
@@ -26,7 +26,7 @@ import { RetardService } from '../../services/retard.service';
 export class AgentManagementComponent implements OnInit {
   constructor(private readonly agentsService: AgentsService) {}
 
-  public searchInput: string = "";
+  public searchInput: string = '';
 
   public agentList: Agent[] = [];
   public allAgents: Agent[] = [];
@@ -86,6 +86,9 @@ export class AgentManagementComponent implements OnInit {
         this.agentList = this.agentList.filter(
           (agent) => agent.matricule != this.agentToDelete
         );
+        this.allAgents = this.allAgents.filter(
+          (agent) => agent.matricule != this.agentToDelete
+        );
       },
       error: () => {
         alert("Erreur lors de la suppression de l'agent");
@@ -107,32 +110,40 @@ export class AgentManagementComponent implements OnInit {
   }
 
   public onSearch() {
-    if (this.searchInput.trim() == "") {
+    if (this.searchInput.trim() == '') {
       this.agentList = this.allAgents;
     } else {
-      let numeric = this.isNumeric(this.searchInput.trim())
-      if (numeric) this.agentList = this.allAgents.filter(agent => agent.matricule == Number(this.searchInput));
-
+      let numeric = this.isNumeric(this.searchInput.trim());
+      if (numeric)
+        this.agentList = this.allAgents.filter(
+          (agent) => agent.matricule == Number(this.searchInput)
+        );
       else {
-        this.agentList = this.allAgents.filter(agent => {
-          return agent.nom.toLowerCase().includes(this.searchInput.trim().toLowerCase()) || 
-          agent.prenom.toLowerCase().includes(this.searchInput.trim().toLowerCase()) ||
-          (agent.nom + " " + agent.prenom).toLowerCase().includes(this.searchInput.trim().toLowerCase())
-        })
+        this.agentList = this.allAgents.filter((agent) => {
+          return (
+            agent.nom
+              .toLowerCase()
+              .includes(this.searchInput.trim().toLowerCase()) ||
+            agent.prenom
+              .toLowerCase()
+              .includes(this.searchInput.trim().toLowerCase()) ||
+            (agent.nom + ' ' + agent.prenom)
+              .toLowerCase()
+              .includes(this.searchInput.trim().toLowerCase())
+          );
+        });
       }
     }
-    
   }
 
   public isNumeric(searchInput: string) {
-    let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    let numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-    for(let i = 0; i < searchInput.length; i++) {
+    for (let i = 0; i < searchInput.length; i++) {
       if (!numbers.includes(searchInput[i])) {
         return false;
       }
     }
     return true;
   }
-
 }

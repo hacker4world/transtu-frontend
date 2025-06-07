@@ -64,11 +64,10 @@ export class AjouterDefaillanceModalComponent {
       next: (res) => {
         this.defaillanceCreated.emit(res.data);
       },
-      error: (err) => {
-        console.error("Erreur lors de l'ajout de la défaillance", err);
+      error: (error) => {
         this.modalError = {
           show: true,
-          message: "L'agent n'est pas trouvé",
+          message: error.error.message,
         };
       },
     });

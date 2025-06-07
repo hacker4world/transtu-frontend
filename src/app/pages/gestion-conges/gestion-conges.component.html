@@ -2,12 +2,17 @@
   <h2 class="page-title">Gestion des conges</h2>
 
   <div class="action-buttons">
-
-    <div class="search-bar">
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="Recherche Conge">
-    </div>
-
+    <form (ngSubmit)="onSearch()">
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input
+          [(ngModel)]="searchInput"
+          name="searchInput"
+          type="text"
+          placeholder="Recherche Conge"
+        />
+      </div>
+    </form>
 
     <button
       (click)="setShowAddCongeModal(true)"

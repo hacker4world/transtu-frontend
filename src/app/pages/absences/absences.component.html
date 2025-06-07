@@ -1,28 +1,29 @@
 <div class="top-bar">
-    <h2 class="page-title">Absences</h2>
+  <h2 class="page-title">Absences</h2>
 
+  <form (ngSubmit)="onSearch()">
     <div class="search-bar">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Recherche Absences">
+      <input [(ngModel)]="searchInput" name="searchInput" type="text" placeholder="Recherche Absences" />
     </div>
-
+  </form>
 </div>
 
 <div class="card">
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Agent</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let absence of absences" >
-            <td>{{ absence.agentName }}</td>
-            <td> {{ absence.day }} / {{ absence.month }} / {{ absence.year }} </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Agent</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let absence of absences">
+          <td>{{ absence.agentName }}</td>
+          <td>{{ absence.day }} / {{ absence.month }} / {{ absence.year }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

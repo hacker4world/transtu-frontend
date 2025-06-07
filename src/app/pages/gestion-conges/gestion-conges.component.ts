@@ -4,6 +4,7 @@ import { AjouterCongeModalComponent } from '../../components/ajouter-conge-modal
 import { ModifierCongeComponent } from '../../components/modifier-conge/modifier-conge.component';
 import { CongeService } from '../../services/conge.service';
 import { DeleteConfirmModalComponent } from '../../components/delete-confirm-modal/delete-confirm-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-gestion-conges',
@@ -13,11 +14,16 @@ import { DeleteConfirmModalComponent } from '../../components/delete-confirm-mod
     AjouterCongeModalComponent,
     ModifierCongeComponent,
     DeleteConfirmModalComponent,
+    FormsModule,
   ],
   templateUrl: './gestion-conges.component.html',
   styleUrl: './gestion-conges.component.css',
 })
 export class GestionCongesComponent implements OnInit {
+  public searchInput = '';
+
+  public allConges: any[] = [];
+
   public conges: any[] = [];
 
   public showAddCongeModal: boolean = false;
@@ -32,6 +38,7 @@ export class GestionCongesComponent implements OnInit {
     this.congeService.getAllConges().subscribe({
       next: (response: any) => {
         this.conges = response.data;
+        this.allConges = response.data;
       },
     });
   }
@@ -45,7 +52,7 @@ export class GestionCongesComponent implements OnInit {
   }
 
   public creerConge(data: any) {
-    this.conges.push(data);
+    this.allConges.push(data);
     this.setShowAddCongeModal(false);
   }
 
@@ -66,6 +73,9 @@ export class GestionCongesComponent implements OnInit {
   deleteConge() {
     this.congeService.deleteConge(this.congeToDelete.id).subscribe({
       next: () => {
+        this.allConges = this.allConges.filter(
+          (c) => c.id !== this.congeToDelete.id
+        );
         this.conges = this.conges.filter((c) => c.id !== this.congeToDelete.id);
         this.closeDeleteConfirmation();
       },
@@ -75,9 +85,39 @@ export class GestionCongesComponent implements OnInit {
   }
 
   updateConge(congeData: any) {
-    this.conges = this.conges.map(c => {
-      if (c.id === congeData.id) return {...congeData}
+    this.allConges = this.conges.map((c) => {
+      if (c.id === congeData.id) return { ...congeData };
       else return c;
-    })
+    });
+  }
+
+  public onSearch() {
+    if (this.searchInput.trim() == '') {
+      this.conges = this.allConges;
+    } else {
+      let numeric = this.isNumeric(this.searchInput.trim());
+      if (numeric)
+        this.conges = this.allConges.filter(
+          (conge) => conge.agentId == Number(this.searchInput)
+        );
+      else {
+        this.conges = this.allConges.filter((conge) => {
+          return conge.agentName
+            .toLowerCase()
+            .includes(this.searchInput.trim().toLowerCase());
+        });
+      }
+    }
+  }
+
+  public isNumeric(searchInput: string) {
+    let numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+    for (let i = 0; i < searchInput.length; i++) {
+      if (!numbers.includes(searchInput[i])) {
+        return false;
+      }
+    }
+    return true;
   }
 }
