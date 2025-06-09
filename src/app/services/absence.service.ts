@@ -12,4 +12,9 @@ export class AbsenceService {
     public getAllAbsences() {
         return this.httpClient.get(this.url + "/all")
     }
+
+    public getAgentAbsences(agentId: any) {
+        return this.httpClient.get(this.url + `/agent/${agentId}`)
+    }
+
 }

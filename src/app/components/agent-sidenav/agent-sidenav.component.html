@@ -1,0 +1,43 @@
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">
+      <i class="fa-solid fa-bus logo-icon"></i>
+      <span>Transtu Agent</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Menu Admin</div>
+      <a
+        class="nav-item"
+        [class.active]="route == '/agent/heures'"
+        routerLink="./heures"
+      >
+        <i class="fa-solid fa-users"></i>
+        <span>Heures de travail</span>
+      </a>
+      <a
+        class="nav-item"
+        [class.active]="route == '/agent/absences'"
+        routerLink="./absences"
+      >
+        <i class="fa-solid fa-list-check"></i>
+        <span>Absences</span>
+      </a>
+      <a
+        class="nav-item"
+        routerLink="./retards"
+        [class.active]="route == '/agent/retards'"
+      >
+        <i class="fa-solid fa-paper-plane"></i>
+        <span>Retards</span>
+      </a>
+    </div>
+
+    <a class="nav-item" style="color: red" (click)="logout()">
+      <i class="fa-solid fa-sign-out-alt"></i>
+      <span>Se deconnecter</span>
+    </a>
+  </nav>
+</aside>

@@ -39,8 +39,6 @@ export class UpdateAgentModalComponent implements OnInit {
       this.agentData.prenom.trim() === '' ||
       this.agentData.date_naiss.trim() === '' ||
       this.agentData.situation_familiale.trim() === '' ||
-      this.agentData.code_emploi_assure.trim() === '' ||
-      this.agentData.code_grade.trim() === '' ||
       this.agentData.role.trim() === ''
     ) {
       this.error = {

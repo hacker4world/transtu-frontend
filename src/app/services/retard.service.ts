@@ -12,4 +12,8 @@ export class RetardService {
   public getAllRetards() {
     return this.httpClient.get(this.url + '/all');
   }
+
+  public getAgentRetards(id: any) {
+    return this.httpClient.get(this.url + `/agent/${id}`);
+  }
 }

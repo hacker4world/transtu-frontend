@@ -11,6 +11,10 @@ import { GestionToursServicesComponent } from './pages/gestion-tours-services/ge
 import { HeuresComponent } from './pages/heures/heures.component';
 import { AbsencesComponent } from './pages/absences/absences.component';
 import { RetardsComponent } from './pages/retards/retards.component';
+import { AgentDashboardComponent } from './pages/agent-dashboard/agent-dashboard.component';
+import { AgentHeuresComponent } from './pages/agent-heures/agent-heures.component';
+import { AgentAbsencesComponent } from './pages/agent-absences/agent-absences.component';
+import { AgentRetardsComponent } from './pages/agent-retards/agent-retards.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +36,29 @@ export const routes: Routes = [
     component: RequestPasswordResetComponent,
   },
   {
+    path: 'agent',
+    component: AgentDashboardComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'agents',
+        pathMatch: 'full',
+      },
+      {
+        path: 'heures',
+        component: AgentHeuresComponent,
+      },
+      {
+        path: 'absences',
+        component: AgentAbsencesComponent,
+      },
+      {
+        path: 'retards',
+        component: AgentRetardsComponent,
+      },
+    ],
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent,
     children: [
@@ -50,7 +77,7 @@ export const routes: Routes = [
       },
       {
         path: 'gestion-conges',
-        component: GestionCongesComponent
+        component: GestionCongesComponent,
       },
       {
         path: 'prevu',
@@ -58,11 +85,11 @@ export const routes: Routes = [
       },
       {
         path: 'tours-services',
-        component: GestionToursServicesComponent
+        component: GestionToursServicesComponent,
       },
       {
         path: 'heures',
-        component: HeuresComponent
+        component: HeuresComponent,
       },
       {
         path: 'absences',
@@ -70,8 +97,8 @@ export const routes: Routes = [
       },
       {
         path: 'retards',
-        component: RetardsComponent
-      }
+        component: RetardsComponent,
+      },
     ],
   },
 ];

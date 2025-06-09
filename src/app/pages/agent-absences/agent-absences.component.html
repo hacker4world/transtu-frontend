@@ -1,0 +1,22 @@
+<div class="top-bar">
+  <h2 class="page-title">Absences</h2>
+</div>
+
+<div class="card">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Agent</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let absence of absences">
+          <td>{{ absence.agentName }}</td>
+          <td>{{ absence.day }} / {{ absence.month }} / {{ absence.year }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -36,7 +36,17 @@ export class LoginComponent {
 
         localStorage.setItem('user', JSON.stringify(userData));
 
-        this.router.navigate(['../dashboard']);
+        if (userData.role == 'admin') {
+          this.router.navigate(['../dashboard']);
+        } else if (userData.role == 'agent') {
+          this.router.navigate(['../agent']);
+        } else {
+          this.loginError = {
+            show: true,
+            message:
+              'L’utilisation du tableau de bord est réservée aux administrateurs et aux agents',
+          };
+        }
       },
       error: (error) => {
         if (error.status === 403) {
